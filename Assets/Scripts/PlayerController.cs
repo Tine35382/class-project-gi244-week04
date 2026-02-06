@@ -23,15 +23,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(hInput * speed * Time.deltaTime * Vector3.right);
         if (transform.position.x < -xRange)
         {
-            transform.position = new Vector3(-xRange, 
-                transform.position.y, 
-                transform.position.z);
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
-        if (transform.position.x > xRange)
+        else if (transform.position.x > xRange)
         {
-            transform.position = new Vector3(xRange,
-                transform.position.y,
-                transform.position.z);
+            transform.position = new Vector3(xRange,transform.position.y,transform.position.z);
         }
 
         if (shootAction.triggered)
@@ -46,9 +42,16 @@ public class PlayerController : MonoBehaviour
         //Gizmos.DrawWireSphere(transform.position, 1);
         //Gizmos.color = Color.green;
         //Gizmos.DrawLine(transform.position, Camera.main.transform.position);
-        Gizmos.DrawLine(
-            new Vector3(-xRange, transform.position.y, transform.position.z),
-            new Vector3(xRange, transform.position.y, transform.position.z)
-        );
+
+        Vector3 left = new Vector3(-xRange, transform.position.y, transform.position.z);
+        Vector3 right = new Vector3(xRange, transform.position.y, transform.position.z);
+
+        Gizmos.DrawLine (left , right);
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(left, 0.5f); 
+        Gizmos.DrawSphere(right, 0.5f);
+
+
+
     }
 }
